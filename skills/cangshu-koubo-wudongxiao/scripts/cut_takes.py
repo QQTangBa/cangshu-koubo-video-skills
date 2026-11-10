@@ -93,14 +93,18 @@ if pieces:
         if _s > pieces[0]["from"]: print(f"开头收紧 {_s - pieces[0]['from']:.3f}s，第一帧 = 开口")
         pieces[0]["from"] = max(pieces[0]["from"], _s)
 
-fc, maps, t_new, out_pieces = [], [], 0.0, []
+# 视频按整帧号截（start_frame/end_frame），声音按同样的帧边界截，剪点记录按帧数累加。
+# 2026-11-10 修：以前按 4 位小数的秒数截，四舍五入偶尔多带一帧，concat 给声音补空白跟上（音画仍对），
+# 但 cut_pieces 的 at 按时长累加，一刀一刀落后，一条 4 分钟的片子到结尾差 14 帧，后半段光流融合全做在了没剪的地方
+fc, maps, f_new, out_pieces = [], [], 0, []
 for i, p in enumerate(pieces):
-    s, e = p["from"], p["to"]
+    sf, ef = round(p["from"] * FPS), round(p["to"] * FPS)
+    s, e = sf / FPS, ef / FPS
     fade = 0.008
-    fc.append(f"[0:v]trim=start={s:.4f}:end={e:.4f},setpts=PTS-STARTPTS[v{i}]")
-    fc.append(f"[0:a]atrim=start={s:.4f}:end={e:.4f},asetpts=PTS-STARTPTS,afade=t=in:d={fade},afade=t=out:st={e - s - fade:.4f}:d={fade}[a{i}]")
+    fc.append(f"[0:v]trim=start_frame={sf}:end_frame={ef},setpts=PTS-STARTPTS[v{i}]")
+    fc.append(f"[0:a]atrim=start={s:.6f}:end={e:.6f},asetpts=PTS-STARTPTS,afade=t=in:d={fade},afade=t=out:st={e - s - fade:.6f}:d={fade}[a{i}]")
     maps.append(f"[v{i}][a{i}]")
-    out_pieces.append({"src_from": s, "src_to": e, "at": round(t_new, 4)}); t_new += e - s
+    out_pieces.append({"src_from": round(s, 6), "src_to": round(e, 6), "at": round(f_new / FPS, 6)}); f_new += ef - sf
 fc.append("".join(maps) + f"concat=n={len(pieces)}:v=1:a=1[v][a]")
 (P / "cut_filter.txt").write_text(";\n".join(fc))
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-filter_complex_script", str(P / "cut_filter.txt"), "-map", "[v]", "-map", "[a]",
@@ -118,5 +122,6 @@ for w in words:
 (P / "cut_pieces_校正前.json").unlink(missing_ok=True)  # 重剪后旧的校正记录作废，否则 from_base 会跳过 fix_edits
 total = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(P / "cut.mp4")]))
 print(f"{len(edl['keep'])} 个 keep → {len(pieces)} 小段，成片 {total:.2f}s（原 {len(pcm) / SR:.2f}s）")
+if abs(total - f_new / FPS) > 1.5 / FPS: print(f"注意：成片 {total:.3f}s 和剪点记录 {f_new / FPS:.3f}s 对不上，跑 fix_edits.py 按画面校正")
 for k, p in zip(range(len(out_pieces)), out_pieces):
     print(f"  {p['at']:7.2f}  ← 原 {p['src_from']:.2f}-{p['src_to']:.2f}")

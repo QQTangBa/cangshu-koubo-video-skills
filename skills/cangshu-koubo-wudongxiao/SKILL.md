@@ -74,7 +74,7 @@ $PY $SK/scripts/make_source.py $P --speed 1.1         # 只有用户说了倍速
 ### 5. 渲 9:16
 配置 `$P/剪辑配置.json`（样例 [references/config-example.json](references/config-example.json)）：系列名、期数（都可留空）、点缀色、倍速（不写就是 1）、每节从哪句字幕开始和一句摘要。摘要怎么写、版式和配色见 [references/layout.md](references/layout.md)；呼吸、换景别、融合的参数和来由见 [references/motion.md](references/motion.md)。
 ```bash
-$PY $SK/scripts/fix_edits.py $P                       # 剪点按真实画面校正（剪辑表算的剪点会和拼出来的视频差 1–8 帧）
+$PY $SK/scripts/fix_edits.py $P                       # 剪点按真实画面校正：每段头一帧对原片找真剪点（变速、拼接会让剪点记录差几帧到十几帧）
 $PY $SK/scripts/render.py $P --still 60               # 先出一张静帧给用户看版式
 $PY $SK/scripts/render.py $P --out $P/成片_vN_竖屏.mp4
 ```
