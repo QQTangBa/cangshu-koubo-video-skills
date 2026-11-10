@@ -1,0 +1,4 @@
+interface:
+  display_name: "口播动效剪辑（3:4）"
+  short_description: "口播剪成 3:4 动效成片：真人与图形交替、多画风、一键质检"
+  default_prompt: "用 $cangshu-koubo-motion-edit 把这条口播素材剪成 3:4 动效成片。"

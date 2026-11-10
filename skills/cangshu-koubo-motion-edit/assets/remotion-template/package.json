@@ -1,0 +1,21 @@
+{
+  "name": "koubo-motion-34",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@remotion/cli": "4.0.520",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.520"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "preview": "remotion render src/index.ts Koubo34 out/preview.mp4 --scale=0.5 --crf=26 --concurrency=4",
+    "render": "remotion render src/index.ts Koubo34 out/final.mp4 --crf=12 --concurrency=4"
+  }
+}

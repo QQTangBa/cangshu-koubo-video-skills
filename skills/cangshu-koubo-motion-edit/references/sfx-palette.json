@@ -1,0 +1,138 @@
+{
+  "_说明": "音效调色板：角色 → 素材（路径相对音效库目录，用 build_sfx.py --library 或环境变量 KOUBO_SFX_LIB 指定；library 字段留空时以这两者为准）+ 裁剪区间（秒）+ 增益（默认 1.0，只在某个素材听着偏响/偏轻时微调）。build_sfx.py 按这里裁剪、把每个音最响的 20ms 对齐到同一响度、记峰值位置，输出到工程 public/sfx/。素材库：音效库/mixkit_常用30/（文件名 = Mixkit 编号_原名；免费商用、不用署名、不能单独分发）+ 音效库/kenney_ui_audio、kenney_impact_sounds（CC0），整套都能用 fetch_sfx_library.py 从公开渠道下载。选音原则：偏亮、像空气和实物的声音（参考片音效 12–16kHz 突出），不用低沉的合成嗖、正弦波叮和低音炮；type 用的是 1386 键盘录音里最干净的一下。变体顺序有意义：手写场景 cue 可以用 v 指定（click 0=鼠标、1=开关）。",
+  "library": "",
+  "roles": {
+    "swoosh": [
+      {
+        "src": "音效库/mixkit_常用30/1530_paper_slide.mp3",
+        "trim": [
+          0.0,
+          0.5
+        ],
+        "gain": 1.0
+      },
+      {
+        "src": "音效库/mixkit_常用30/1104_page_turn_single.mp3",
+        "trim": [
+          0.02,
+          0.36
+        ],
+        "gain": 1.0
+      }
+    ],
+    "whoosh": [
+      {
+        "src": "音效库/mixkit_常用30/1490_fast_whoosh_transition.mp3",
+        "trim": [
+          0.2,
+          0.8
+        ],
+        "gain": 1.0
+      },
+      {
+        "src": "音效库/mixkit_常用30/175_short_transition_sweep.mp3",
+        "trim": [
+          0.15,
+          0.55
+        ],
+        "gain": 1.0
+      }
+    ],
+    "pop": [
+      {
+        "src": "音效库/mixkit_常用30/2364_hard_pop_click.mp3",
+        "trim": [
+          0.0,
+          0.14
+        ],
+        "gain": 1.0
+      },
+      {
+        "src": "音效库/mixkit_常用30/2356_dry_pop_up_notification_alert.mp3",
+        "trim": [
+          0.0,
+          0.1
+        ],
+        "gain": 1.0
+      }
+    ],
+    "click": [
+      {
+        "src": "音效库/mixkit_常用30/2997_clear_mouse_clicks.mp3",
+        "trim": [
+          0.0,
+          0.08
+        ],
+        "gain": 1.0
+      },
+      {
+        "src": "音效库/kenney_ui_audio/Audio/switch2.ogg",
+        "trim": [
+          0.02,
+          0.24
+        ],
+        "gain": 1.0
+      }
+    ],
+    "tick": [
+      {
+        "src": "音效库/mixkit_常用30/1125_typewriter_soft_click.mp3",
+        "trim": [
+          0.08,
+          0.18
+        ],
+        "gain": 1.0
+      }
+    ],
+    "check": [
+      {
+        "src": "音效库/kenney_ui_audio/Audio/switch3.ogg",
+        "trim": [
+          0.03,
+          0.3
+        ],
+        "gain": 1.0
+      }
+    ],
+    "ding": [
+      {
+        "src": "音效库/mixkit_常用30/931_service_bell.mp3",
+        "trim": [
+          0.0,
+          0.7
+        ],
+        "gain": 1.0
+      }
+    ],
+    "impact": [
+      {
+        "src": "音效库/kenney_impact_sounds/Audio/impactSoft_heavy_000.ogg",
+        "trim": [
+          0.0,
+          0.45
+        ],
+        "gain": 1.0
+      }
+    ],
+    "type": [
+      {
+        "src": "音效库/mixkit_常用30/1386_keyboard_typing.mp3",
+        "trim": [
+          12.42,
+          12.68
+        ],
+        "gain": 1.0
+      }
+    ],
+    "splash": [
+      {
+        "src": "音效库/mixkit_常用30/1311_water_splash.mp3",
+        "trim": [
+          0.1,
+          0.95
+        ],
+        "gain": 1.0
+      }
+    ]
+  }
+}

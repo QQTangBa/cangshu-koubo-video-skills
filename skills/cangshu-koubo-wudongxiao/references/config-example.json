@@ -1,0 +1,15 @@
+{
+  "series": "你的系列名（可留空）",
+  "day": "DAY 1",
+  "_day": "期数，可留空；series 和 day 都留空时上黑边只剩进度条和分节摘要",
+  "accent": "鼠尾草绿",
+  "_accent": "预设：鼠尾草绿 / 雾蓝 / 冷白灰 / 丁香紫，或直接写 [R, G, B]",
+  "_speed": "用户说了倍速才加 \"speed\": 1.1 这一行；不写就是 1，不变速",
+  "_font": "可选：\"font\": 中文字体路径（.ttc 时再配 font_index_bold / font_index_regular），\"font_num\": 数字字体路径；默认用 macOS 自带的冬青黑体和 DIN Condensed",
+  "chapters": [
+    {"from_caption": "", "title": "第一节的钩子摘要"},
+    {"from_caption": "第二节开头那句字幕原文", "title": "为什么大多数人做反了"},
+    {"from_caption": "第三节开头那句字幕原文", "title": "先做的人反而赢"}
+  ],
+  "bleep": []
+}

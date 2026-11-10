@@ -1,0 +1,4 @@
+interface:
+  display_name: "口播无动效剪辑（9:16）"
+  short_description: "剪口误和长停顿，9:16 嵌入加进度栏，呼吸推拉无痕剪点"
+  default_prompt: "用 $cangshu-koubo-wudongxiao 剪掉这条口播的口误和长停顿，出 9:16 竖屏成片。"
